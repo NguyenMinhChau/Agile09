@@ -1,0 +1,140 @@
+﻿@model Agile09.EF.Admin
+@{ 
+    ViewBag.Title = "Đăng Ký Quản Lý";
+    Layout = null; 
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="SBAdmin">
+    <meta name="author" content="Lê Quang Hưng">
+
+    <title>Đăng Ký Quản Lý</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="/Asset/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="/Asset/admin/css/sb-admin-2.css" rel="stylesheet" />
+    <link href="/Asset/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    
+</head>
+
+<style>
+    .checkbox-status {
+        top: -25%;
+        transform: translateY(25%);
+    }
+</style>
+
+<body class="bg-gradient-primary">
+
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-10 col-lg-12 col-md-9">
+
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block  bg-create-manager"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Đăng Kí Quản Lý</h1>
+                                    </div>
+                                    @if (TempData["AlertMessage"] != null)
+                                    {
+                        <div id="AlertBox" class="alert @TempData["AlertType"] hide">
+                            @TempData["AlertMessage"]
+                        </div>}
+                                    @using (Html.BeginForm("Create", "Manager", FormMethod.Post))
+                                    {
+                        <div class="user">
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-user id-username", @placeholder = "UserName", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control form-control-user id-password", @placeholder = "Password", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-user id-name", @placeholder = "Tên người dùng", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6">
+                                    @Html.TextBoxFor(model => model.Phone, new { @class = "form-control form-control-user id-phone", @placeholder = "Số điện thoại", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-user id-email", @placeholder = "Email", @required = "required" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control form-control-user id-address", @placeholder = "Địa chỉ", @required = "required" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-sm-6 checkbox-status"
+                                        <label>Trạng thái kích hoạt</label>
+                                        @Html.CheckBoxFor(model => model.Status)
+                                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                    </div>
+                                <button type="submit" id="submitBtn" class="btn btn-primary btn-user btn-block mt-3">Register Account</button>
+                                <hr>
+                                <a href="#" class="btn btn-google btn-user btn-block mt-3">
+                                    <i class="fab fa-google fa-fw"></i> Register with Google
+                                </a>
+                                <a href="#" class="btn btn-facebook btn-user btn-block mt-3">
+                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                </a>
+                            </div>}
+                                    <hr>
+                                    <div class="text-center mr-3">
+                                        <a class="small" href="#">Helper?</a>
+                                    </div>
+                                    <div class="text-center">
+                                        <a class="small" href="~/Admin/Login/Index">Login Account</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/Asset/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="/Asset/Admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/Asset/Admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/Asset/Admin/js/sb-admin-2.min.js"></script>
+</body>
+
+</html>
+
+
