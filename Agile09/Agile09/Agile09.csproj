@@ -132,10 +132,12 @@
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\Constant.cs" />
     <Compile Include="Common\Encrypter.cs" />
     <Compile Include="Common\ManagerLogin.cs" />
     <Compile Include="Common\UserLogin.cs" />
+    <Compile Include="Controllers\CartItemController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -213,6 +216,7 @@
     <Content Include="TMDT.bak" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\CartItem\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
