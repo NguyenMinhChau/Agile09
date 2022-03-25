@@ -1,0 +1,42 @@
+﻿@model List<Agile09.EF.Product>
+<div class="agile-tp">
+    <h5>Được quảng cáo trong tuần này</h5>
+    <p class="w100-ad">Chúng tôi đã tập hợp tất cả các ưu đãi được quảng cáo của chúng tôi vào một nơi, vì vậy bạn sẽ không bỏ lỡ rất nhiều.</p>
+</div>
+<div class="agile_top_brands_grids">
+    @foreach (var item in Model)
+    {
+    <div style="min-height:300px;margin-bottom:5px" class="col-md-4 top_brand_left">
+        <div class="hover14 column">
+            <div class="agile_top_brand_left_grid brd-15">
+                <div class="agile_top_brand_left_grid_pos">
+                    <img src="/Asset/Shop/images/offer.png" alt=" " class="img-responsive brd-tl-15" />
+                </div>
+                <div class="agile_top_brand_left_grid1">
+                    <figure>
+                        <div class="snipcart-item block">
+                            <div class="snipcart-thumb">
+                                <a href="/chi-tiet/@item.MetaTitle-@item.ID"><img title=" " alt=" " src="@item.Image" style="max-height:300px;object-fit:contain" class="w-full"/></a>
+                                <p class="margin-0">@item.Name</p>
+                                <div class="stars">
+                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                </div>
+                                <h4 class="item-price"><p>@(item.Price.HasValue?item.Price.Value.ToString("N0")+" VNĐ":"Liên Hệ")</p> <span>@(item.PromotionPrice.HasValue?item.PromotionPrice.Value.ToString("N0"):"") VNĐ</span></h4>
+                            </div>
+                            <div class="snipcart-details top_brand_home_details">
+                                <h4><a href="/them-gio-hang?productID=@item.ID&quantity=1" class="btn btn-primary">Thêm vào giỏ</a></h4>
+                            </div>
+                        </div>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+    <div class="clearfix"> </div>
+</div>

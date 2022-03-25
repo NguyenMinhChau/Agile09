@@ -1,0 +1,14 @@
+﻿
+@model List<Agile09.EF.Slide>
+<ul id="demo1">
+    @foreach (var item in Model)
+    {
+        <li>
+            <img src="@item.Image" alt="" style="object-fit:contain"/>
+            <!--Slider Description example-->
+            <div class="slide-desc">
+                <h3 style="color:#2E58D7;">@item.Description</h3>
+            </div>
+        </li>
+    }
+</ul>

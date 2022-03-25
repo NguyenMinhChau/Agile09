@@ -142,6 +142,14 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
+    <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\ExpeditionsDAO.cs" />
+    <Compile Include="DAO\MenuDAO.cs" />
+    <Compile Include="DAO\NewOffersDAO.cs" />
+    <Compile Include="DAO\ProductCategoryDAO.cs" />
+    <Compile Include="DAO\ProductDAO.cs" />
+    <Compile Include="DAO\SlideDAO.cs" />
+    <Compile Include="DAO\ToursDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="EF\Admin.cs" />
     <Compile Include="EF\Category.cs" />
@@ -168,11 +176,26 @@
   <ItemGroup>
     <Content Include="Asset\admin\css\sb-admin-2.css" />
     <Content Include="Asset\admin\css\sb-admin-2.min.css" />
+    <Content Include="Asset\admin\js\demo\datatables-demo.js" />
     <Content Include="Asset\admin\js\sb-admin-2.min.js" />
     <Content Include="Asset\admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Asset\admin\vendor\datatables\dataTables.bootstrap4.min.css" />
+    <Content Include="Asset\admin\vendor\datatables\dataTables.bootstrap4.min.js" />
+    <Content Include="Asset\admin\vendor\datatables\jquery.dataTables.min.js" />
     <Content Include="Asset\admin\vendor\fontawesome-free\css\all.min.css" />
     <Content Include="Asset\admin\vendor\jquery-easing\jquery.easing.min.js" />
     <Content Include="Asset\admin\vendor\jquery\jquery.min.js" />
+    <Content Include="Asset\Shop\css\bootstrap.css" />
+    <Content Include="Asset\Shop\css\skdslider.css" />
+    <Content Include="Asset\Shop\css\style.css" />
+    <Content Include="Asset\Shop\images\card.png" />
+    <Content Include="Asset\Shop\images\offer.png" />
+    <Content Include="Asset\Shop\js\bootstrap.min.js" />
+    <Content Include="Asset\Shop\js\easing.js" />
+    <Content Include="Asset\Shop\js\jquery-1.11.1.min.js" />
+    <Content Include="Asset\Shop\js\minicart.min.js" />
+    <Content Include="Asset\Shop\js\move-top.js" />
+    <Content Include="Asset\Shop\js\skdslider.min.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -210,13 +233,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="TMDT.bak" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\CartItem\Index.cshtml" />
+    <Content Include="Views\Shared\_Slide.cshtml" />
+    <Content Include="Views\Shared\_Expeditions.cshtml" />
+    <Content Include="Views\Shared\_Tours.cshtml" />
+    <Content Include="Views\Shared\_NewOffers.cshtml" />
+    <Content Include="Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Views\Shared\_Navigation.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_ProductCategory.cshtml" />
+    <Content Include="Views\Shared\_QuantityCart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
