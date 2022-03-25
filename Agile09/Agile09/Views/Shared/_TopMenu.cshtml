@@ -1,0 +1,41 @@
+﻿@model List<Agile09.EF.Menu>
+<div class="agileits_header">
+    <div class="container">
+        <div class="w3l_offers">
+            <p>SALE UP TO 70% OFF. USE CODE "SALE70%" <a href="#"><br />MUA SẮM NGAY!!</a></p>
+        </div>
+        <div class="agile-login">
+            @{ 
+                var session = (Agile09.Common.UserLogin)Session[Agile09.Common.Constant.USER_SECTION];
+            }
+            @if (session == null)
+            {
+                <ul>
+                    @foreach (var item in Model)
+                    {
+                        <li><a href="@item.Link" target="@item.Target">@item.Text </a></li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <ul class="text-white">
+                    <li>Xin chào: <span class="userName">@session.UserName</span> | Welcome to OnlineShop2</li>
+                    <li>@Html.ActionLink("Đăng xuất", "Logout", "Login", new object { }, new { @class = "dropdown-item text-center" })</li>
+                </ul>
+            }
+        </div>
+        @{ Html.RenderAction("_QuantityCart", "Home");}
+        <div class="clearfix"> </div>
+    </div>
+</div>
+<style>
+    .text-white{
+        color: white;
+        font-weight: bold;
+    }
+    .userName{
+        text-transform: capitalize;
+        color: red;
+    }
+</style>
