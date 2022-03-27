@@ -47,5 +47,8 @@ namespace Agile09.EF
         public string ModifiedBy { get; set; }
 
         public bool Status { get; set; }
+
+        [StringLength(32)]
+        public string NewPassword { get; set; }
     }
 }

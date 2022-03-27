@@ -52,6 +52,46 @@ namespace Agile09.Controllers
             }
             return View("Index", "Login");
         }
+
+        public ActionResult Edit(int id)
+        {
+            var user = new UserDAO();
+            var model = user.ViewDetail(id);
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDAO();
+                var password = user.Password; //pass cũ khi submit
+                var newPassword = user.NewPassword; //pass mới khi submit
+                ShopOnlineDb db = new ShopOnlineDb();
+                var detail = dao.GetUser(user.ID); //user lấy ra
+
+                if (!string.IsNullOrEmpty(user.Password) && !string.IsNullOrEmpty(user.NewPassword))
+                {
+                    //var isCheckPass = dao.CheckPassword(detail.Name, detail.Email, Encrypter.MD5Hash(password));// checkpasss
+                    if (detail.Password == Encrypter.MD5Hash(password))
+                    {
+                        detail.Password = Encrypter.MD5Hash(newPassword);
+                        detail.Name = user.Name;
+                        detail.Email = user.Email;
+                        detail.UserName = user.UserName;
+                        detail.Address = user.Address;
+                        detail.Phone = user.Phone;
+                        dao.Update(detail);
+                    }
+                    else
+                    {
+                        SetAlert("Mật khẩu nhập cũ nhập vào không đúng", "error");
+                        return RedirectToAction("Edit", "User");
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Login");
+        }
         public void SetAlert(string mess, string type)
         {
             TempData["AlertMessage"] = mess;
@@ -67,38 +107,6 @@ namespace Agile09.Controllers
             {
                 TempData["AlertType"] = "alert-danger";
             }
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var user = new UserDAO();
-            var model = user.ViewDetail(id);
-            return View(model);
-        }
-        [HttpPost]
-        public ActionResult Edit(User user)
-        {
-            if (ModelState.IsValid)
-            {
-                var dao = new UserDAO();
-                if (!string.IsNullOrEmpty(user.Password))
-                {
-                    var encrypterMD5 = Encrypter.MD5Hash(user.Password);
-                    user.Password = encrypterMD5;
-                }
-                bool res = dao.Update(user);
-                if (res)
-                {
-                    //SetAlert("Cập nhật người dùng thành công", "success");
-                    return RedirectToAction("Index", "User");
-                }
-                else
-                {
-
-                    ModelState.AddModelError("", "Cập nhật người dùng không thành công");
-                }
-            }
-            return View("Index");
         }
         [HttpDelete]
         public ActionResult Delete(int id)
