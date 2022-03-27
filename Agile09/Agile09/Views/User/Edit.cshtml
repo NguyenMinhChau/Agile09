@@ -1,0 +1,225 @@
+﻿@model Agile09.EF.User
+@{
+    ViewBag.Title = "Cập nhật tài khoản";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div class="col-lg-3 d-none d-lg-block bg-register-image"></div>
+                <div class="col-lg-6">
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Cập nhật tài khoản <span class="bold underline text-danger">@Model.UserName</span></h1>
+                        </div>
+                        @if (TempData["AlertMessage"] != null)
+                        {
+                            <div id="AlertBox" class="alert @TempData["AlertType"] mr-lr-15px">
+                                @TempData["AlertMessage"]
+                            </div>
+                        }
+
+                        <div class="user">
+                            @*@using (Html.BeginForm("Edit", "User", FormMethod.Post))
+                                {*@
+                            <form method="post">
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3">
+                                        @Html.TextBoxFor(model => model.UserName, new { @class = "form-control form-control-user", @placeholder = "UserName" })
+                                        @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-user", @placeholder = "Email" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3">
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control form-control-user", @placeholder = "Tên người dùng" })
+                                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-6">
+                                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control form-control-user", @placeholder = "Số điện thoại" })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 position-relative">
+                                        <input type="password" class="form-control form-control-user id-password" placeholder="Old-Password" required name="Password" />
+                                        <div class="icon-pass-container old-pass">
+                                            <span class="icon-hide-pass"><i class="icon-hide fa-solid fa-eye-slash"></i></span>
+                                            <span class="icon-show-pass hide"><i class="icon-show fa-solid fa-eye"></i></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 position-relative">
+                                        <input type="password" class="form-control form-control-user id-password-new" placeholder="New-Password" required name="NewPassword" />
+                                        <div class="icon-pass-container new-pass">
+                                            <span class="icon-hide-pass"><i class="icon-hide fa-solid fa-eye-slash"></i></span>
+                                            <span class="icon-show-pass hide"><i class="icon-show fa-solid fa-eye"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row pd-lr-15px">
+                                    <input type="password" class="form-control" id="PasswordConfirm" placeholder="Confirm-Password" required />
+                                    <span class="text-danger message-confirmpass"></span>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control form-control-user", @placeholder = "Địa chỉ" })
+                                        @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col-sm-6 checkbox-status mb-3">
+                                        <label>Trạng thái kích hoạt</label>
+                                        @Html.CheckBoxFor(model => model.Status)
+                                        @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group row pd-lr-15px">
+                                    <button type="submit" id="submitBtn" class="btn btn-primary btn-user btn-block mt-3" onclick="UpdateAccount(@Model.ID)">Cập nhật tài khoản</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 d-none d-lg-block bg-register-image"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .checkbox-status {
+        top: -25%;
+        transform: translateY(25%);
+    }
+
+    .pd-lr-15px {
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+    }
+
+    .mr-lr-15px {
+        margin-right: 15px !important;
+        margin-left: 15px !important;
+    }
+
+    .bold {
+        font-weight: bold !important;
+    }
+
+    .underline {
+        text-decoration: underline !important;
+    }
+
+    .icon-pass-container {
+        position: absolute !important;
+        top: 6px !important;
+        right: 28px !important;
+    }
+
+    .icon-hide-pass,
+    .icon-show-pass {
+        cursor: pointer !important;
+    }
+
+        .icon-hide-pass:hover .icon-hide,
+        .icon-show-pass:hover .icon-show {
+            opacity: 0.8 !important;
+        }
+
+    .icon-hide,
+    .icon-show {
+        font-size: 12px !important;
+    }
+    /* PC */
+    @@media (min-width: 64em) {
+    }
+    /* IPAD Pro */
+    @@media (max-width: 64em) {
+    }
+    /* TABLET & MOBILE */
+    @@media (max-width: 63.9375em) {
+        .mb-3 {
+            margin-bottom: 12px !important;
+        }
+    }
+    /* TABLET */
+    @@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    }
+    /* MOBILE */
+    @@media (max-width: 46.25em) {
+    }
+</style>
+@section Scripts{
+    <script>
+        var ids;
+        function UpdateAccount(id) {
+            ids = id;
+        }
+        var PasswordOldElement = document.querySelector(".id-password");
+        var PasswordNewElement = document.querySelector(".id-password-new");
+        var PasswordConfirmElement = document.querySelector("#PasswordConfirm");
+        var MessageConfirmPass = document.querySelector('.message-confirmpass');
+        var formElement = document.querySelector('.user form');
+        var valuePasswordNew;
+        var valuePasswordConfirm;
+        PasswordNewElement.addEventListener("keyup", function (e) {
+            valuePasswordNew = e.target.value;
+        })
+        PasswordConfirmElement.addEventListener("keyup", function (e) {
+            valuePasswordConfirm = e.target.value;
+        })
+        formElement.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (valuePasswordNew == valuePasswordConfirm) {
+                formElement.action = ids;
+                formElement.submit();
+                MessageConfirmPass.innerHTML = '';
+            } else {
+                MessageConfirmPass.innerHTML = 'Mật khẩu nhập vào không khớp!!!';
+            }
+        })
+        function ShowHideOldPassword() {
+            IconShowOldPassword.classList.toggle('hide');
+            IconHideOldPassword.classList.toggle('hide');
+        }
+        function ShowHideNewPassword() {
+            IconShowNewPassword.classList.toggle('hide');
+            IconHideNewPassword.classList.toggle('hide');
+        }
+
+        //Icon Ẩn hiện password-old
+        var IconHideOldPassword = document.querySelector('.icon-pass-container.old-pass .icon-hide-pass');
+        var IconShowOldPassword = document.querySelector('.icon-pass-container.old-pass .icon-show-pass');
+
+        IconHideOldPassword.addEventListener('click', function (e) {
+            ShowHideOldPassword();
+            PasswordOldElement.type = 'text'
+        })
+        IconShowOldPassword.addEventListener('click', function (e) {
+            ShowHideOldPassword();
+            PasswordOldElement.type = 'password'
+        })
+
+        //Icon Ẩn hiện password-new
+        var IconHideNewPassword = document.querySelector('.icon-pass-container.new-pass .icon-hide-pass');
+        var IconShowNewPassword = document.querySelector('.icon-pass-container.new-pass .icon-show-pass');
+
+        IconHideNewPassword.addEventListener('click', function (e) {
+            ShowHideNewPassword();
+            PasswordNewElement.type = 'text';
+        })
+        IconShowNewPassword.addEventListener('click', function (e) {
+            ShowHideNewPassword();
+            ; PasswordNewElement.type = 'password';
+        })
+    </script>
+}
+
+

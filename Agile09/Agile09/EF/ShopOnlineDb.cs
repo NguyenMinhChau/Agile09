@@ -168,6 +168,10 @@ namespace Agile09.EF
             modelBuilder.Entity<User>()
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.NewPassword)
+                .IsUnicode(false);
         }
     }
 }

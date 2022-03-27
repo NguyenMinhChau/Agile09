@@ -238,7 +238,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="TMDT.bak" />
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\CartItem\Index.cshtml" />
@@ -251,6 +250,7 @@
     <Content Include="Views\Shared\_Footer.cshtml" />
     <Content Include="Views\Shared\_ProductCategory.cshtml" />
     <Content Include="Views\Shared\_QuantityCart.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

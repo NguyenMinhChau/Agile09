@@ -69,6 +69,10 @@ namespace Agile09.DAO
         {
             return db.Users.Find(id);
         }
+        public User GetUser(long id)
+        {
+            return db.Users.Find(id);
+        }
         public int Login(string userName, string password)
         {
             var result = db.Users.SingleOrDefault(x => x.UserName == userName);
