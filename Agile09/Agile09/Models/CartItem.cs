@@ -6,6 +6,7 @@ using System.Web;
 
 namespace Agile09.Models
 {
+    [Serializable]
     public class CartItem
     {
         public Product Product { get; set; }
