@@ -1,12 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Agile09",
-    "\\Agile09\\Agile09",
-    "\\Agile09\\Agile09\\Controllers",
-    "\\Agile09\\Agile09\\Views",
-    "\\Agile09\\Agile09\\Views\\CartItem"
+    ""
   ],
-  "SelectedNode": "\\Agile09\\Agile09\\Views\\CartItem\\Index.cshtml",
+  "SelectedNode": "\\Agile09.sln",
   "PreviewInSolutionExplorer": false
 }
