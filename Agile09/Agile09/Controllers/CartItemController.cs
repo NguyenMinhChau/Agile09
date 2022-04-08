@@ -12,7 +12,7 @@ using System.Web.Script.Serialization;
 
 namespace Agile09.Controllers
 {
-    public class CartItemController : Controller
+    public class CartItemController : BaseController
     {
         // GET: CartItem
         public ActionResult Index()
