@@ -141,11 +141,13 @@
     <Compile Include="Common\UserLogin.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CartItemController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DAO\AdminDAO.cs" />
     <Compile Include="DAO\CategoryDAO.cs" />
+    <Compile Include="DAO\ContactDAO.cs" />
     <Compile Include="DAO\ExpeditionsDAO.cs" />
     <Compile Include="DAO\MenuDAO.cs" />
     <Compile Include="DAO\NewOffersDAO.cs" />
@@ -199,6 +201,7 @@
     <Content Include="Asset\Shop\images\offer.png" />
     <Content Include="Asset\Shop\js\bootstrap.min.js" />
     <Content Include="Asset\Shop\js\Controller\cartController.js" />
+    <Content Include="Asset\Shop\js\Controller\Contact.js" />
     <Content Include="Asset\Shop\js\easing.js" />
     <Content Include="Asset\Shop\js\jquery-1.11.1.min.js" />
     <Content Include="Asset\Shop\js\minicart.min.js" />
@@ -261,6 +264,7 @@
     <Content Include="Views\CartItem\Error.cshtml" />
     <Content Include="Views\CartItem\Success.cshtml" />
     <Content Include="Views\CartItem\Index.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
