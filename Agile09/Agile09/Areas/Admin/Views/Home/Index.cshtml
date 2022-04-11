@@ -1,0 +1,246 @@
+﻿
+@{
+    ViewBag.Title = "Trang Quản Lý";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">OnlineShop2 | Trang Quản Lý</h1>
+    <button onclick="printPDF()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <i class="fas fa-download fa-sm text-white-50"></i> Xuất báo cáo
+    </button>
+</div>
+
+<div id="printMe">
+    <!-- Content Row -->
+    <div class="row">
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Earnings (Monthly)
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Earnings (Annual)
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Earnings (Monthly) Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                Tasks
+                            </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                                </div>
+                                <div class="col">
+                                    <div class="progress progress-sm mr-2">
+                                        <div class="progress-bar bg-info" role="progressbar"
+                                             style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                             aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Requests Card Example -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                Pending Requests
+                            </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+@section ClientSection
+{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        function printPDF() {
+            var printMe = document.getElementById("printMe")
+            var doc = new jsPDF('p', 'pt', [printMe.clientHeight, printMe.clientWidth]);
+            let pdfName = 'ReportShop';
+            doc.canvas.height = 72 * 11;
+            doc.canvas.width = 72 * 8.5;
+            var width = printMe.style.width;
+            var height = printMe.style.height;
+            doc.setFont("times");
+            html2canvas(printMe).then(canvas => {
+                var image = canvas.toDataURL('image/png');
+                doc.addImage(image, 'JPEG', 15, 15, width, height);
+                doc.save(pdfName + '.pdf');
+            });
+        }
+
+        var myChart;
+        function LayDuLieu() {
+            $.ajax({
+                url: "/Admin/Home/ThongKe",
+                data: {
+                    fromDate: $("#txtFrom").val(),
+                    toDate: $("#txtTo").val(),
+                },
+                type: "post",
+                success: function (res) {
+                    let ngay = [];
+                    let tongban = [];
+                    $(res).each((index, value) => {
+                        ngay.push(value.Ngay)
+                        tongban.push(value.TongGiaBan)
+                    })
+                    var chart = document.getElementById('myChart');
+                    myChart = new Chart(chart, {
+                        type: 'bar',
+                        data: {
+                            labels: ngay,
+                            datasets: [{
+                                label: 'Report Shop',
+                                data: tongban,
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(153, 102, 255, 0.2)',
+                                    'rgba(255, 159, 64, 0.2)'
+                                ],
+                                borderColor: [
+                                    'rgba(255, 99, 132, 1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                    'rgba(153, 102, 255, 1)',
+                                    'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                            }
+                        },
+                    })
+
+                    var TongDT = 0;
+                    var TongLN = 0;
+                    $("#tblKetQua").html('');
+                    $("#tfSum").html('');
+                    $(res).each((index, item) => {
+                        let mytr = $("<tr/>");
+                        $("<td/>").html(item.Ngay).appendTo(mytr)
+                        $("<td/>").html(item.Tong).appendTo(mytr)
+                        $("<td/>").html(item.LoiNhuan).appendTo(mytr)
+                        $("#tblKetQua").append(mytr);
+                        TongDT += item.TongGiaBan;
+                        TongLN += item.DoanhThu;
+                    });
+                    let mytrf = $("<tr/>");
+                    $("<td/>").html("<b>Tổng</b>").appendTo(mytrf)
+                    $("<td/>").html(`<b style="color:red"> ${TongDT} </b>`).appendTo(mytrf)
+                    $("<td/>").html(`<b style="color:red"> ${TongLN} </b>`).appendTo(mytrf)
+                    $("#tfSum").append(mytrf);
+                }
+            })
+        }
+
+        function LayDuLieuSanPham() {
+            $.ajax({
+                url: "/Admin/Home/ThongKeSanPham",
+                data: {
+                    fromDate: $("#txtFrom").val(),
+                    toDate: $("#txtTo").val(),
+                },
+                type: "post",
+                success: function (res) {
+                    var TongDT = 0;
+                    $("#tblKetQuaSanPham").html('');
+                    $("#tfSumSanPham").html('');
+                    $(res).each((index, item) => {
+                        let mytr = $("<tr/>");
+                        $("<td/>").html(item.Ngay).appendTo(mytr)
+                        $("<td/>").html(item.Name).appendTo(mytr)
+                        $("<td/>").html(item.Price).appendTo(mytr)
+                        $("<td/>").html(item.Quantity).appendTo(mytr)
+                        $("<td/>").html(item.TongGiaBan).appendTo(mytr)
+                        $("#tblKetQuaSanPham").append(mytr);
+                        TongDT += item.TongDoanhThu;
+                    });
+                    let mytrf = $("<tr/>");
+                    $("<td colspan='4' class='text-center'/>").html("<b>Tổng</b>").appendTo(mytrf)
+                    $("<td/>").html(`<b style="color:red"> ${TongDT} </b>`).appendTo(mytrf)
+                    $("#tfSumSanPham").append(mytrf);
+                }
+            })
+        }
+
+        LayDuLieuSanPham();
+        LayDuLieu();
+
+        $("#btnTimKiem").click(function (e) {
+            e.preventDefault();
+            if (myChart) {
+                myChart.destroy();
+            }
+            LayDuLieuSanPham();
+            LayDuLieu();
+        })
+
+    </script>
+}
+
