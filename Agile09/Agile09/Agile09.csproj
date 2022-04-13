@@ -274,6 +274,7 @@
     <Content Include="Views\CartItem\Success.cshtml" />
     <Content Include="Views\CartItem\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="TMDT.bak" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
