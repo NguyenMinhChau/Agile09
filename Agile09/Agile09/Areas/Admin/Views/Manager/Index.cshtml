@@ -1,0 +1,85 @@
+﻿@model List<Agile09.EF.Admin>
+@{
+    ViewBag.Title = "Danh Sách Quản Lý";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách quản lý</h6>
+    </div>
+    <div class="card-body">
+        <a href="~/Admin/Manager/Create" class="btn btn-primary mb-3">Thêm mới quản lý</a>
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Họ và tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Họ và tên</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
+                        <th>Số điện thoại</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.ID">
+                            <td>@item.ID</td>
+                            <td>@item.UserName</td>
+                            <td>@item.Name</td>
+                            <td>@item.Address</td>
+                            <td>@item.Email</td>
+                            <td>@item.Phone</td>
+                            <td style="min-width:130px"><a href="#" style="text-decoration:none" class="btnActiveAdmin" data-id="@item.ID">@(item.Status?"Kích hoạt":"Đã khóa")</a></td>
+                            <td>
+                                <a href="~/Admin/Manager/Edit/@item.ID">Sửa</a>
+                                |
+                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                {
+                               Confirm = "Hành động không thể khôi phục.Bạn có muốn xóa người quản lý này?",
+                               OnComplete = "$('#row_" + @item.ID + "').remove()",
+                               HttpMethod = "Delete"
+                           })
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section ClientSection{
+    <script src="~/Asset/admin/js/AjaxController/ManagerController.js"></script>
+}
+<style>
+    .btnActiveAdmin {
+        padding: 5px 12px;
+        border-radius: 10px;
+        color: #fff;
+        background-color: green;
+    }
+
+        .btnActiveAdmin:hover {
+            color: #fff;
+        }
+</style>
+
+
+
