@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Agile09",
+    "\\Agile09\\Agile09",
+    "\\Agile09\\Agile09\\Areas",
+    "\\Agile09\\Agile09\\Areas\\Admin",
+    "\\Agile09\\Agile09\\Areas\\Admin\\Controllers"
   ],
-  "SelectedNode": "\\Agile09.sln",
+  "SelectedNode": "\\Agile09\\Agile09\\Areas\\Admin\\Controllers\\UserController.cs",
   "PreviewInSolutionExplorer": false
 }
