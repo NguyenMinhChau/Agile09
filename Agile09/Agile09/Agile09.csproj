@@ -214,6 +214,7 @@
     <Content Include="Asset\Shop\js\minicart.min.js" />
     <Content Include="Asset\Shop\js\move-top.js" />
     <Content Include="Asset\Shop\js\skdslider.min.js" />
+    <Content Include="bin\CKFinder.dll" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -237,6 +238,8 @@
     <Content Include="Areas\Admin\Views\Manager\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Product\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -280,11 +283,14 @@
     <Content Include="Views\CartItem\Index.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="TMDT.bak" />
+    <Content Include="Views\Home\Category.cshtml" />
+    <Content Include="Views\Home\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
+    <Folder Include="Asset\admin\js\plugin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
