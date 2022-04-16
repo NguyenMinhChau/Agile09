@@ -1,0 +1,145 @@
+﻿@model List<Agile09.EF.Product>
+@{
+    var category = (Agile09.EF.ProductCategory)ViewBag.Category;
+    ViewBag.Title = "Danh Mục " + category.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Trang chủ</a></li>
+            <li><span aria-hidden="true"></span>Danh sách sản phẩm</li>
+            <li class="active">@category.Name</li>
+        </ol>
+    </div>
+</div>
+<div class="newproducts-w3agile">
+    <div class="container">
+        <h3>Danh sách sản phẩm @category.Name</h3>
+        <!--- products --->
+        <div class="products">
+            <div class="container">
+                <div class="col-md-12 products-right">
+                    <div class="products-right-grid">
+                        <div class="products-right-grids">
+                            <div class="sorting">
+                                <select id="country" onchange="change_country(this.value)" class="frm-field required sect form-control">
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Default sorting</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by popularity</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by average rating</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Sort by price</option>
+                                </select>
+                            </div>
+                            <div class="sorting-left">
+                                <select id="country1" onchange="change_country(this.value)" class="frm-field required sect form-control">
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 9</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 18</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>Item on page 32</option>
+                                    <option value="null"><i class="fa fa-arrow-right" aria-hidden="true"></i>All</option>
+                                </select>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                    <div class="agile_top_brands_grids">
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-md-4 top_brand_left" style="min-height:300px;margin-bottom:5px">
+                                <div class="hover14 column">
+                                    <div class="agile_top_brand_left_grid brd-15">
+                                        <div class="agile_top_brand_left_grid_pos">
+                                            <img src="/Asset/Shop/images/offer.png" alt=" " class="img-responsive brd-tl-15">
+                                        </div>
+                                        <div class="agile_top_brand_left_grid1">
+                                            <figure>
+                                                <div class="snipcart-item block">
+                                                    <div class="snipcart-thumb">
+                                                        <a href="/chi-tiet/@item.MetaTitle-@item.ID"><img title=" " alt=" " src="@item.Image" style="height:200px;object-fit:contain" class="w-full" /></a>
+                                                        <p>@item.Name</p>
+                                                        <div class="stars">
+                                                            <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                            <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                                        </div>
+                                                        <h4 class="item-price"><p>@(item.Price.HasValue?item.Price.Value.ToString("N0")+" VNĐ":"Liên Hệ")</p> <span>@(item.PromotionPrice.HasValue?item.PromotionPrice.Value.ToString("N0"):"") VNĐ</span></h4>
+                                                    </div>
+                                                    <div class="snipcart-details top_brand_home_details">
+                                                        <h4><a href="/them-gio-hang?productID=@item.ID&quantity=1" class="btn btn-primary">Thêm vào giỏ</a></h4>
+                                                    </div>
+                                                </div>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <div class="clearfix"> </div>
+                    </div>
+                    <!--Phân trang-->
+                    @if (ViewBag.TotalPage > 0)
+                    {
+                        var pageDisplay = (int)(ViewBag.MaxPage);
+                        int totalPage = (int)ViewBag.TotalPage;
+                        int currentPage = ((int)ViewBag.Page);
+
+                        //Create numeric links
+                        var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                        var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+                        var link = "/san-pham/" + category.MetaTitle + '-' + category.ID;
+                        <nav class="numbering">
+                            <ul class="pagination paging">
+                                @if (currentPage > ViewBag.First)
+                                {
+                                    <li>
+                                        <a href="@link?page=@ViewBag.First" title="Trang đầu" class="first" aria-label="Previous">
+                                            <i class="fa fa-angle-double-left"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@link?page=@ViewBag.Prev" title="Trang trước" class="prev" aria-label="Previous">
+                                            <i class="fa fa-angle-left"></i>
+                                        </a>
+                                    </li>
+                                }
+                                @for (var i = startPageIndex; i <= endPageIndex; i++)
+                                {
+                                    if (currentPage == i)
+                                    {
+                                        <li class="active" title="Trang @i"><a href="@link&page=@i">@i<span class="sr-only">(current)</span></a></li>
+
+                                    }
+                                    else
+                                    {
+                                        <li class="" title="Trang @i"><a href="@link?page=@i">@i<span class="sr-only">(current)</span></a></li>
+                                    }
+                                }
+                                @if (currentPage < totalPage)
+                                {
+                                    <li>
+                                        <a href="@link?page=@ViewBag.Next" title="Trang sau" class="next" aria-label="Next">
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="@link?page=@ViewBag.Last" title="Trang cuối" class="last" aria-label="Next">
+                                            <i class="fa fa-angle-double-right"></i>
+                                        </a>
+                                    </li>
+                                }
+                            </ul>
+                        </nav>
+                    }
+                    else
+                    {
+                        <span>Không có sản phẩm nào</span>
+                    }
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+        <!--- products --->
+
+    </div>
+</div>

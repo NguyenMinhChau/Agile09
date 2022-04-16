@@ -1,0 +1,161 @@
+﻿@model Agile09.EF.Product
+@{
+    ViewBag.Title = "Mô Tả Chi Tiết " + Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var category = (Agile09.EF.ProductCategory)ViewBag.Category;
+    var relativeProducts = (List<Agile09.EF.Product>)ViewBag.ReletiveProducts;
+}
+
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+
+        .swiper-slide img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+
+@section Scripts{
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            cssMode: true,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            spaceBetween: 30,
+        });
+    </script>
+}
+
+<div class="breadcrumbs">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
+            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Trang chủ</a></li>
+            <li><span aria-hidden="true"></span>@category.Name</li>
+            <li class="active">@Model.Name</li>
+        </ol>
+    </div>
+</div>
+
+<div class="products">
+    <div class="container">
+        <div class="agileinfo_single">
+
+            <div class="col-md-4 agileinfo_single_left">
+                <!-- Swiper -->
+                <div class="swiper mySwiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img id="example" src="@Model.Image" alt=" " class="img-responsive">
+                        </div>
+                        <div class="swiper-slide">
+                            <img id="example" src="@Model.Image" alt=" " class="img-responsive">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+            <div class="col-md-8 agileinfo_single_right">
+                <h2>@Model.Name</h2>
+                <div class="rating1">
+                    <span class="starRating">
+                        <input id="rating5" type="radio" name="rating" value="5">
+                        <label for="rating5">5</label>
+                        <input id="rating4" type="radio" name="rating" value="4">
+                        <label for="rating4">4</label>
+                        <input id="rating3" type="radio" name="rating" value="3" checked="">
+                        <label for="rating3">3</label>
+                        <input id="rating2" type="radio" name="rating" value="2">
+                        <label for="rating2">2</label>
+                        <input id="rating1" type="radio" name="rating" value="1">
+                        <label for="rating1">1</label>
+                    </span>
+                </div>
+                <div class="w3agile_description">
+                    <h4>Description :</h4>
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+                <div class="snipcart-item block">
+                    <div class="snipcart-thumb agileinfo_single_right_snipcart">
+                        <h4 class="m-sing">@(Model.Price.HasValue?Model.Price.Value.ToString() + " VNĐ":"Liên Hệ") <span>@Model.PromotionPrice VNĐ</span></h4>
+                    </div>
+                    <div class="snipcart-details agileinfo_single_right_details">
+                        <h4><a href="/them-gio-hang?productID=@Model.ID&quantity=1" class="btn btn-primary">Thêm vào giỏ</a></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
+<div class="newproducts-w3agile">
+    <div class="container">
+        <h3>Sản phẩm liên quan</h3>
+        <div class="agile_top_brands_grids">
+            @foreach (var item in relativeProducts)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-md-3 top_brand_left-1" style="min-height:300px;margin-bottom:5px">
+                    <div class="hover14 column">
+                        <div class="agile_top_brand_left_grid brd-15">
+                            <div class="agile_top_brand_left_grid_pos">
+                                <img src="@item.Image" alt=" " class="img-responsive brd-tl-15 brd-tr-15">
+                            </div>
+                            <div class="agile_top_brand_left_grid1">
+                                <figure>
+                                    <div class="snipcart-item block">
+                                        <div class="snipcart-thumb">
+                                            <a href="@url"><img title=" " alt=" " src="@item.Image" style="object-fit:contain;height:200px" /></a>
+                                            <p>@item.Name</p>
+                                            <div class="stars">
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star blue-star" aria-hidden="true"></i>
+                                                <i class="fa fa-star gray-star" aria-hidden="true"></i>
+                                            </div>
+                                            <h4 class="item-price"><p>@(item.Price.HasValue?item.Price.Value.ToString("N0"):"Liên hệ")</p> <span>@item.PromotionPrice</span></h4>
+                                        </div>
+                                        <div class="snipcart-details top_brand_home_details">
+                                            <h4><a href="/them-gio-hang?productID=@item.ID&quantity=1" class="btn btn-primary">Thêm vào giỏ</a></h4>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+</div>
+
